@@ -1,0 +1,1868 @@
+/* src/styles/global.css */
+
+/* Базовые сбросы */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Глобальный фон и шрифт */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #0d0d0d; /* тёмный фон в стиле survival */
+  color: #f5f5f5;
+  line-height: 1.4;
+}
+
+/* Общие контейнеры */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* Кнопки */
+button {
+  background: #1e90ff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background: #007bff;
+}
+
+/* Поля ввода */
+input {
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 16px;
+  background: #1a1a1a;
+  color: #fff;
+}
+
+/* Сообщения */
+.message-bubble {
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin: 6px 0;
+  max-width: 75%;
+  word-wrap: break-word;
+}
+
+.message-bubble.mine {
+  background: #1e90ff;
+  color: #fff;
+  margin-left: auto;
+}
+
+.message-bubble.theirs {
+  background: #2a2a2a;
+  color: #f5f5f5;
+  margin-right: auto;
+}
+
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .container {
+    max-width: 100%;
+    padding: 12px;
+  }
+
+  button, input {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .message-bubble {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  button, input {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+.messages-container {
+  width: 100%;          /* растянуть на всю ширину */
+  padding: 0 12px 80px; /* 🔑 сверху/слева/справа/снизу: 
+                           слева/справа по 12px, снизу запас под панель */
+  box-sizing: border-box; /* чтобы padding учитывался в ширине */
+}
+
+
+
+ .message-bubble {
+  max-width: 70%;       /* ограничиваем ширину пузыря */
+  border-radius: 12px;
+  padding: 10px 14px;
+  word-wrap: break-word;
+}
+}
+
+.chat-messages {
+  padding-bottom: 70px; /* 🔑 запас под панель ввода */
+  overflow-y: auto;     /* скролл если сообщений много */
+  padding: 20 12px; /* 🔑 общий отступ от краёв экрана */
+}
+
+.chat-row {
+  display: flex;
+  align-items: flex-start;
+}
+
+.chat-row.mine {
+  justify-content: flex-end; /* мои сообщения справа */
+}
+
+.chat-row.theirs {
+  justify-content: flex-start; /* чужие сообщения слева */
+}
+
+
+
+.chat-input-bar {
+  position: fixed;
+  bottom: 40px;       /* 🔑 теперь панель выше на 60px */
+  left: 0;
+  right: 0;
+  background: #111;
+  padding: 8px;
+  border-top: 1px solid #333;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+
+.chat-input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.chat-button {
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #1e90ff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+/* Футер */
+.footer {
+  position: fixed;
+  bottom: 0;              /* закрепляем внизу */
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 12px;
+  border-top: 1px solid #333;
+  background-color: #111; /* тёмный фон в стиле survival */
+  color: #f5f5f5;
+  z-index: 999;           /* поверх контента */
+}
+
+/* Ссылки */
+.footer-link {
+  text-decoration: none;
+  color: #f5f5f5;
+  font-size: 14px;
+  position: relative;
+}
+
+.footer-link:hover {
+  color: #1e90ff;
+}
+
+/* Бейдж непрочитанных */
+.footer-badge {
+  color: crimson;
+  font-weight: bold;
+  margin-left: 4px;
+}
+
+/* Корзина */
+.cart-link {
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  background: crimson;
+  color: #fff;
+  border-radius: 12px;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+
+/* Шапка */
+.header {
+  position: fixed;
+  top: 0;                /* 🔑 закрепляем сверху */
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  background-color: #272424; /* тёмный фон в стиле survival */
+  border-bottom: 1px solid #333;
+  color: #f5f5f5;
+  z-index: 1000;          /* поверх контента */
+}
+
+.header-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.header-nav {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.header-link {
+  text-decoration: none;
+  color: #f5f5f5;
+  font-size: 14px;
+}
+
+.header-link:hover {
+  color: #1e90ff;
+}
+
+.header-button {
+  background: #1e90ff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.header-button:hover {
+  background: #007bff;
+}
+
+/* Контейнер диалогов */
+.dialogs-container {
+  max-width: 600px;
+  margin: 80px auto 80px; /* отступ сверху под header и снизу под footer */
+  padding: 0 16px;
+}
+
+.dialogs-title {
+  font-size: 22px;
+  margin-bottom: 16px;
+  color: #f5f5f5;
+}
+
+.dialogs-empty {
+  color: #aaa;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Карточка диалога */
+.dialog-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: #1a1a1a;
+  color: #f5f5f5;
+}
+
+/* Информация о собеседнике */
+.dialog-info {
+  flex: 1;
+}
+
+.dialog-username {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.dialog-last {
+  font-size: 14px;
+  color: #bbb;
+  margin-top: 4px;
+}
+
+/* Бейдж непрочитанных */
+.dialog-unread {
+  background: crimson;
+  color: #fff;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Кнопка "Ответить" */
+.dialog-button {
+  padding: 6px 12px;
+  background: #1e90ff;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.dialog-button:hover {
+  background: #007bff;
+}
+
+/* Friends */
+.friends-container {
+  max-width: 600px;
+  margin: 80px auto 80px; /* отступы под header и footer */
+  padding: 0 16px;
+}
+
+.friends-title {
+  font-size: 22px;
+  margin-bottom: 16px;
+  color: #f5f5f5;
+}
+
+.friends-input {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.friends-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background: #1a1a1a;
+  color: #f5f5f5;
+}
+
+.friends-username {
+  flex: 1;
+}
+
+.friends-link {
+  text-decoration: none;
+  color: #1e90ff;
+}
+
+.friends-link:hover {
+  text-decoration: underline;
+}
+
+/* Buttons */
+.friends-button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.friends-button.add {
+  background: #1e90ff;
+  color: #fff;
+}
+
+.friends-button.cancel {
+  background: #ff9800;
+  color: #fff;
+}
+
+.friends-button.accept {
+  background: #4caf50;
+  color: #fff;
+}
+
+.friends-button.reject {
+  background: crimson;
+  color: #fff;
+}
+
+.friends-status.pending {
+  color: orange;
+}
+
+.friends-status.accepted {
+  color: green;
+}
+
+/* Counter */
+.friends-counter {
+  display: block;
+  margin-top: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: #1e90ff;
+  text-decoration: none;
+}
+
+.friends-counter:hover {
+  text-decoration: underline;
+}
+
+/* Requests */
+.friends-requests {
+  margin-top: 30px;
+}
+
+.friends-empty {
+  color: #aaa;
+}
+
+/* FriendsList */
+.friendslist-container {
+  max-width: 600px;
+  margin: 80px auto 80px; /* отступы под header и footer */
+  padding: 0 16px;
+}
+
+.friendslist-back {
+  margin-bottom: 20px;
+  background: #1e90ff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.friendslist-back:hover {
+  background: #007bff;
+}
+
+.friendslist-title {
+  font-size: 22px;
+  margin-bottom: 16px;
+  color: #f5f5f5;
+}
+
+.friendslist-empty {
+  color: #aaa;
+  text-align: center;
+  margin-top: 20px;
+}
+
+
+
+.friendslist-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;                 /* уменьшили расстояние */
+  margin-bottom: 10px;
+  padding: 6px 10px;        /* уменьшили внутренние отступы */
+  border: 1px solid #333;
+  border-radius: 6px;
+  background: #1a1a1a;
+  color: #f5f5f5;
+  max-width: 100%;          /* 🔑 карточка не выходит за экран */
+  overflow: hidden;         /* если текст длинный — обрезается */
+}
+
+.friendslist-username {
+  flex: 1;
+  font-size: 14px;          /* уменьшили шрифт */
+  white-space: nowrap;      /* не переносим имя */
+  overflow: hidden;
+  text-overflow: ellipsis;  /* длинные имена сокращаются с "..." */
+}
+
+.friendslist-link,
+.friendslist-remove {
+  font-size: 12px;          /* уменьшили кнопки */
+  padding: 4px 8px;         /* компактные размеры */
+}
+
+
+@media (max-width: 480px) {
+  .friendslist-card {
+    padding: 5px 8px;
+    gap: 6px;
+  }
+
+  .friendslist-username {
+    font-size: 13px;
+  }
+
+  .friendslist-link,
+  .friendslist-remove {
+    font-size: 11px;
+    padding: 3px 6px;
+  }
+}
+
+/* Auth pages (Register & Login) */
+.auth-container {
+  max-width: 420px;
+  margin: 80px auto;
+  padding: 20px;
+  background: #1a1a1a;
+  border-radius: 8px;
+  border: 1px solid #333;
+  color: #f5f5f5;
+}
+
+.auth-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.auth-input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #111;
+  color: #fff;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: #1e90ff;
+}
+
+.auth-checkbox {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.auth-error {
+  color: crimson;
+  font-size: 14px;
+}
+
+.auth-button {
+  background: #1e90ff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.auth-button:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+
+.auth-switch {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.auth-switch a {
+  color: #1e90ff;
+  text-decoration: none;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}
+
+/* Адаптивность */
+@media (max-width: 480px) {
+  .auth-container {
+    margin: 60px 10px;
+    padding: 16px;
+  }
+
+  .auth-title {
+    font-size: 18px;
+  }
+
+  .auth-button {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+/* Profile */
+.profile-container {
+  max-width: 500px;
+  margin: 0 auto;              /* центрируем по горизонтали */
+  padding: 20px;
+  background: #1a1a1a;
+  border-radius: 8px;
+  border: 1px solid #333;
+  color: #f5f5f5;
+
+  /* 🔑 центрирование по экрану */
+  min-height: calc(100vh - 120px); /* учитываем высоту header+footer */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;     /* центрируем по вертикали */
+}
+
+.profile-title {
+  font-size: 22px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.profile-error {
+  color: crimson;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.profile-loading {
+  color: #aaa;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Серверная информация */
+.profile-server {
+  margin-top: 20px;
+  padding: 12px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background: #222;
+}
+
+.profile-server h3 {
+  margin-bottom: 8px;
+  color: #1e90ff;
+}
+
+
+/* Контейнер админ-панели */
+.admin-container {
+  max-width: 800px;
+  margin: 80px auto;
+  padding: 20px;
+  background: #1a1a1a;
+  border-radius: 8px;
+  border: 1px solid #333;
+  color: #f5f5f5;
+}
+
+/* Заголовки */
+.admin-title {
+  font-size: 24px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.admin-block {
+  margin-top: 20px;
+  padding: 16px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background: #222;
+}
+
+.admin-block h2 {
+  margin-bottom: 12px;
+  color: #1e90ff;
+}
+
+/* Кнопки */
+.admin-button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  margin-top: 8px;
+  background: #444;
+  color: #fff;
+}
+
+.admin-button:hover {
+  background: #555;
+}
+
+.admin-button.primary {
+  background: #007bff;
+}
+
+.admin-button.success {
+  background: #28a745;
+}
+
+.admin-button.danger {
+  background: crimson;
+}
+
+.admin-button.small {
+  padding: 6px 10px;
+  font-size: 13px;
+}
+
+/* Ссылки */
+.admin-link {
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.admin-link.violet {
+  background: #6f42c1;
+  color: #fff;
+}
+
+.admin-link.yellow {
+  background: #ffc107;
+  color: #000;
+}
+
+/* Поля ввода */
+.admin-input {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #111;
+  color: #fff;
+  margin-right: 8px;
+}
+
+.admin-input.full {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.admin-input.small {
+  width: 80px;
+  padding: 6px;
+}
+
+/* Блок действий */
+.admin-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+/* Список пользователей */
+.admin-users {
+  margin-top: 20px;
+}
+
+.admin-user-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background: #1a1a1a;
+}
+
+.admin-user-info {
+  flex: 1;
+}
+
+.admin-points {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.admin-empty {
+  color: #888;
+  text-align: center;
+  margin-top: 12px;
+}
+
+@media (max-width: 480px) {
+  .admin-container {
+    margin: 70px 10px;
+    padding: 16px;
+  }
+
+  .admin-title {
+    font-size: 20px;
+  }
+
+  .admin-block {
+    padding: 12px;
+  }
+
+  .admin-button,
+  .admin-link {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
+  .admin-user-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .admin-points {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* Контейнер */
+.adminshop-container {
+  max-width: 1000px;
+  margin: 80px auto;
+  padding: 20px;
+  background: #1a1a1a;
+  border-radius: 8px;
+  border: 1px solid #333;
+  color: #f5f5f5;
+}
+
+/* Блоки */
+.adminshop-block {
+  margin-bottom: 24px;
+  padding: 16px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background: #222;
+}
+
+.adminshop-block h3 {
+  margin-bottom: 12px;
+  color: #1e90ff;
+}
+
+/* Списки категорий */
+.adminshop-list {
+  margin-top: 12px;
+  padding-left: 20px;
+}
+
+.adminshop-list-item {
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Поля ввода */
+.adminshop-input,
+.adminshop-select,
+.adminshop-textarea,
+.adminshop-file {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #111;
+  color: #fff;
+  margin-right: 8px;
+}
+
+.adminshop-input.small {
+  width: 100px;
+  padding: 6px;
+}
+
+.adminshop-textarea {
+  width: 100%;
+  margin-top: 8px;
+  resize: vertical;
+}
+
+/* Чекбоксы */
+.adminshop-checkbox {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+/* Кнопки */
+.adminshop-button {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: #444;
+  color: #fff;
+  margin-top: 8px;
+}
+
+.adminshop-button:hover {
+  background: #555;
+}
+
+.adminshop-button.small {
+  padding: 6px 10px;
+  font-size: 13px;
+}
+
+.adminshop-button.cancel {
+  background: #777;
+}
+
+.adminshop-button.danger {
+  background: crimson;
+}
+
+/* Цены и время */
+.adminshop-prices,
+.adminshop-time {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* Сетка товаров */
+.adminshop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.adminshop-card {
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 12px;
+  background: #1a1a1a;
+}
+
+.adminshop-card h4 {
+  margin: 8px 0;
+}
+
+.adminshop-image {
+  width: 100%;
+  border-radius: 6px;
+  object-fit: cover;
+  margin-bottom: 8px;
+}
+
+/* Модалка */
+.adminshop-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.adminshop-modal {
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 100%;
+  border: 1px solid #333;
+}
+
+.adminshop-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+@media (max-width: 480px) {
+  .adminshop-container {
+    margin: 70px 10px;
+    padding: 16px;
+  }
+
+  .adminshop-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .adminshop-card {
+    padding: 10px;
+  }
+
+  .adminshop-button,
+  .adminshop-input,
+  .adminshop-select {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+}
+
+/* Контейнер магазина */
+.shop-container {
+  max-width: 1000px;
+  margin: 80px auto;
+  padding: 20px;
+  color: #f5f5f5;
+}
+
+.shop-heading {
+  font-size: 26px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+/* Баннер распродажи */
+.shop-sale-banner {
+  margin-bottom: 16px;
+  padding: 12px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background: #201e19;
+  color: #ffcc00;
+}
+
+/* Категории */
+.shop-categories {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.shop-cat-button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+}
+
+.shop-cat-button.active {
+  background: #007bff;
+  color: #fff;
+}
+
+/* Карточка товара */
+.shop-card {
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 12px;
+  background: #1a1a1a;
+}
+
+.shop-image {
+  width: 100%;
+  border-radius: 6px;
+  object-fit: cover;
+  margin-bottom: 8px;
+}
+
+.shop-title {
+  margin: 8px 0;
+  font-size: 18px;
+}
+
+/* Кнопки */
+.shop-button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.shop-button.toggle {
+  background: #444;
+  color: #fff;
+}
+
+.shop-button.add {
+  background: #28a745;
+  color: #fff;
+}
+
+.shop-button:hover {
+  opacity: 0.9;
+}
+
+/* Описание */
+.shop-description {
+  color: #aaa;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+/* Цены */
+.shop-prices {
+  margin-top: 8px;
+}
+
+.shop-sale {
+  color: crimson;
+  font-weight: bold;
+}
+
+/* Переключение цены */
+.shop-price-modes {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.shop-unavailable {
+  margin-top: 10px;
+  color: #d9534f;
+  font-weight: bold;
+}
+
+/* Сетка товаров */
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.shop-empty {
+  color: #777;
+  text-align: center;
+  margin-top: 20px;
+}
+
+@media (max-width: 480px) {
+  .shop-container {
+    margin: 70px 10px;
+    padding: 16px;
+  }
+
+  .shop-heading {
+    font-size: 22px;
+  }
+
+  .shop-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shop-card {
+    padding: 10px;
+  }
+
+  .shop-button {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+}
+
+/* Контейнер */
+.cart-container {
+  max-width: 900px;
+  margin: 80px auto;
+  padding: 20px;
+  background: #1a1a1a;
+  border-radius: 8px;
+  border: 1px solid #333;
+  color: #f5f5f5;
+}
+
+.cart-title {
+  font-size: 24px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.cart-empty {
+  color: #777;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Список */
+.cart-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Товар */
+.cart-item {
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 12px;
+  background: #222;
+}
+
+.cart-image {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.cart-qty {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.cart-remove {
+  margin-top: 8px;
+  background: crimson;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cart-remove:hover {
+  opacity: 0.9;
+}
+
+/* Итог */
+.cart-summary {
+  border-top: 1px solid #333;
+  padding-top: 12px;
+  margin-top: 12px;
+}
+
+.cart-vip {
+  margin-top: 8px;
+  color: #28a745;
+}
+
+.cart-nonvip {
+  margin-top: 8px;
+  color: #aaa;
+}
+
+/* Кнопка заказа */
+.cart-order {
+  margin-top: 16px;
+  background: #007bff;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.cart-order:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 480px) {
+  .cart-container {
+    margin: 70px 10px;
+    padding: 16px;
+  }
+
+  .cart-title {
+    font-size: 20px;
+  }
+
+  .cart-item {
+    padding: 10px;
+  }
+
+  .cart-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .cart-order {
+    width: 100%;
+    font-size: 14px;
+  }
+}
+
+/* Контейнер */
+.orders-container {
+  max-width: 1000px;
+  margin: 80px auto;
+  padding: 20px;
+  background: #1a1a1a;
+  border-radius: 8px;
+  border: 1px solid #333;
+  color: #f5f5f5;
+}
+
+.orders-title {
+  font-size: 24px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.orders-empty {
+  color: #777;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Карточка заказа */
+.order-card {
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background: #222;
+}
+
+.order-actions {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.order-button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: #444;
+  color: #fff;
+}
+
+.order-button.success {
+  background: #28a745;
+}
+
+.order-button.danger {
+  background: crimson;
+}
+
+.order-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Товары */
+.order-subtitle {
+  margin-top: 12px;
+}
+
+.order-items {
+  margin-top: 8px;
+  padding-left: 20px;
+}
+
+.order-item {
+  margin-bottom: 8px;
+}
+
+.order-desc {
+  font-size: 13px;
+  color: #aaa;
+}
+
+.order-cat {
+  font-size: 12px;
+  color: #777;
+}
+
+.order-total {
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+@media (max-width: 480px) {
+  .orders-container {
+    margin: 70px 10px;
+    padding: 16px;
+  }
+
+  .orders-title {
+    font-size: 20px;
+  }
+
+  .order-card {
+    padding: 12px;
+  }
+
+  .order-button {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+}
+
+
+
+
+/* Контейнер */
+.userProfile-container {
+  max-width: 500px;
+  margin: 80px auto;
+  padding: 20px;
+  background: #1a1a1a;
+  border-radius: 8px;
+  border: 1px solid #333;
+  color: #f5f5f5;
+}
+
+.userProfile-title {
+  font-size: 24px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.userProfile-subtitle {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+/* Поля ввода */
+.userProfile-input {
+  flex: 1;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #111;
+  color: #fff;
+}
+
+/* Кнопки */
+.userProfile-button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: #444;
+  color: #fff;
+}
+
+.userProfile-button:hover {
+  opacity: 0.9;
+}
+
+.userProfile-button.chat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #007bff;
+  margin: 0 auto;
+}
+
+/* Блок подарка */
+.userProfile-gift {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+/* Сообщения */
+.userProfile-error {
+  color: crimson;
+}
+
+.userProfile-success {
+  color: green;
+}
+
+/* Чат-кнопка */
+.userProfile-chat {
+  margin-top: 20px;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .userProfile-container {
+    margin: 70px 10px;
+    padding: 16px;
+  }
+
+  .userProfile-title {
+    font-size: 20px;
+  }
+
+  .userProfile-button {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  .userProfile-input {
+    font-size: 14px;
+  }
+}
+
+
+
+.rules-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.rule-card {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.rule-editor {
+  margin-top: 20px;
+  padding: 12px;
+  border: 1px dashed #444;
+  border-radius: 10px;
+  background: #121212;
+}
+
+.back-button {
+  display: inline-block;
+  margin-top: 14px;
+  color: #1e90ff;
+}
+
+
+
+.rules-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.rules-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.rule-card {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.rule-section {
+  margin: 0 0 8px;
+  font-size: 18px;
+  color: #fff;
+}
+
+.rule-content {
+  margin: 0 0 8px;
+  color: #ddd;
+  white-space: pre-wrap;
+}
+
+.rule-updated {
+  color: #999;
+}
+
+.back-button {
+  display: inline-block;
+  margin-top: 14px;
+  color: #1e90ff;
+}
+
+
+
+/* Контейнер страницы */
+.rules-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Список правил */
+.rules-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+/* Карточка правила */
+.rule-card {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 16px;
+  transition: transform 0.2s ease;
+}
+
+.rule-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Заголовок раздела — выделяем цветом */
+.rule-section {
+  margin: 0 0 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #4cafef; /* голубой цвет для разделов */
+}
+
+/* Текст правил */
+.rule-content {
+  margin: 0 0 10px;
+  color: #ddd;
+  line-height: 1.5;
+  white-space: pre-wrap; /* сохраняем переносы строк */
+}
+
+/* Дата обновления */
+.rule-updated {
+  font-size: 14px;
+  color: #999;
+}
+
+/* Кнопка назад */
+.back-button {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 8px 14px;
+  background: #222;
+  border: 1px solid #444;
+  border-radius: 6px;
+  color: #1e90ff;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.back-button:hover {
+  background: #333;
+}
+
+/* Редактор правил (для админа) */
+/* Контейнер */
+.rules-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 12px;
+}
+
+/* Заголовок */
+.rules-container h1 {
+  font-size: 22px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+/* Карточка правила */
+.rule-card {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 12px;
+}
+
+.rule-card h2 {
+  font-size: 18px;
+  margin-bottom: 6px;
+  color: #4cafef;
+}
+
+.rule-card p {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #ddd;
+}
+
+.rule-card small {
+  font-size: 12px;
+  color: #aaa;
+  display: block;
+  margin-top: 4px;
+}
+
+.rule-card button {
+  margin-top: 8px;
+  padding: 6px 12px;
+  font-size: 13px;
+  border: none;
+  border-radius: 6px;
+  background: #4cafef;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.rule-card button:hover {
+  background: #3a9bdc;
+}
+
+/* Редактор */
+.rule-editor {
+  margin-top: 16px;
+  padding: 12px;
+  border: 1px dashed #555;
+  border-radius: 8px;
+  background: #121212;
+}
+
+.rule-editor input,
+.rule-editor textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.rule-editor textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.rule-editor button {
+  padding: 8px 14px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  background: #4cafef;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.rule-editor button:hover {
+  background: #3a9bdc;
+}
+
+/* Кнопка назад */
+.back-button {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 8px 12px;
+  font-size: 14px;
+  background: #222;
+  border: 1px solid #444;
+  border-radius: 6px;
+  color: #1e90ff;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.back-button:hover {
+  background: #333;
+}
+
+/* 📱 Адаптивность */
+@media (max-width: 600px) {
+  .rules-container {
+    padding: 8px;
+  }
+
+  .rules-container h1 {
+    font-size: 18px;
+  }
+
+  .rule-card h2 {
+    font-size: 16px;
+  }
+
+  .rule-card p {
+    font-size: 13px;
+  }
+
+  .rule-editor input,
+  .rule-editor textarea {
+    font-size: 13px;
+    padding: 6px;
+  }
+
+  .rule-editor button,
+  .rule-card button,
+  .back-button {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+}
+
+
+
+/* Кнопка "Правила сервера" */
+.profile-actions {
+  margin-top: 16px;
+}
+
+.profile-button {
+  display: inline-block;
+  padding: 10px 18px;
+  background: #4cafef;          /* голубой фон */
+  color: #fff;                  /* белый текст */
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;        /* убираем подчёркивание */
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.profile-button:hover {
+  background: #3a9bdc;          /* чуть темнее при наведении */
+  transform: translateY(-2px);  /* лёгкий подъём */
+}
+
+.profile-button:active {
+  background: #2f7fb8;          /* ещё темнее при клике */
+  transform: translateY(0);     /* возвращаем на место */
+}
+
+
+
+/* Кнопка "Редактировать правила" */
+.admin-link.blue {
+  display: inline-block;
+  padding: 10px 16px;
+  background: #4cafef;          /* голубой фон */
+  color: #fff;                  /* белый текст */
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.admin-link.blue:hover {
+  background: #3a9bdc;          /* чуть темнее при наведении */
+  transform: translateY(-2px);  /* лёгкий подъём */
+}
+
+.admin-link.blue:active {
+  background: #2f7fb8;          /* ещё темнее при клике */
+  transform: translateY(0);     /* возвращаем на место */
+}
+
