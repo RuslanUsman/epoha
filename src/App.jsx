@@ -18,8 +18,8 @@ import Shop from './pages/Shop';
 import Cart from './pages/Cart';
 import AdminShop from './pages/AdminShop';
 import Orders from './pages/Orders';
-import ServerRules from './pages/ServerRules'; // ✅ страница правил сервера
-import EditRules from './pages/EditRules';     // ✅ страница редактирования правил
+import ServerRules from './pages/ServerRules';
+import EditRules from './pages/EditRules';
 
 // Layout
 import Header from './components/Header';
@@ -28,6 +28,9 @@ import Footer from './components/Footer';
 // Context
 import { CartProvider } from './context/CartContext';
 
+// Components
+import IncomingCall from './components/IncomingCall';
+
 export default function App() {
   const [session, setSession] = useState(null);
   const [checking, setChecking] = useState(true);
@@ -35,12 +38,14 @@ export default function App() {
   useEffect(() => {
     let mounted = true;
 
+    // Получаем текущую сессию
     supabase.auth.getSession().then(({ data }) => {
       if (!mounted) return;
       setSession(data.session);
       setChecking(false);
     });
 
+    // Подписка на изменения авторизации
     const { data: sub } = supabase.auth.onAuthStateChange((_event, s) => {
       setSession(s);
     });
@@ -55,110 +60,104 @@ export default function App() {
     return <div style={{ padding: 24 }}>Загрузка...</div>;
   }
 
+  const isAuth = Boolean(session);
+
   return (
     <CartProvider>
       <BrowserRouter>
         <Header session={session} />
+
+        {/* Входящие вызовы */}
+        {isAuth && (
+          <div style={{ position: 'fixed', top: 80, right: 20, zIndex: 1000 }}>
+            <IncomingCall currentUserId={session.user.id} />
+          </div>
+        )}
+
         <main style={{ minHeight: 'calc(100vh - 120px)', padding: '16px' }}>
           <Routes>
-            {/* Главная перенаправляет на профиль или вход */}
+            {/* Главная */}
             <Route
               path="/"
-              element={<Navigate to={session ? "/profile" : "/login"} replace />}
+              element={<Navigate to={isAuth ? "/profile" : "/login"} replace />}
             />
 
             {/* Регистрация и вход */}
             <Route
               path="/register"
-              element={session ? <Navigate to="/profile" replace /> : <Register />}
+              element={isAuth ? <Navigate to="/profile" replace /> : <Register />}
             />
             <Route
               path="/login"
-              element={session ? <Navigate to="/profile" replace /> : <Login />}
+              element={isAuth ? <Navigate to="/profile" replace /> : <Login />}
             />
 
-            {/* Профиль текущего пользователя */}
+            {/* Профиль */}
             <Route
               path="/profile"
-              element={session ? <Profile /> : <Navigate to="/login" replace />}
+              element={isAuth ? <Profile /> : <Navigate to="/login" replace />}
             />
-
-            {/* Страница правил сервера */}
-            <Route
-              path="/server-rules"
-              element={session ? <ServerRules /> : <Navigate to="/login" replace />}
-            />
-
-            {/* Страница редактирования правил (только для админа) */}
-            <Route
-              path="/edit-rules"
-              element={session ? <EditRules /> : <Navigate to="/login" replace />}
-            />
-
-            {/* Профиль выбранного пользователя */}
             <Route
               path="/profile/:id"
-              element={session ? <UserProfile /> : <Navigate to="/login" replace />}
+              element={isAuth ? <UserProfile /> : <Navigate to="/login" replace />}
             />
 
-            {/* Поиск друзей */}
+            {/* Друзья */}
             <Route
               path="/friends"
-              element={session ? <Friends /> : <Navigate to="/login" replace />}
+              element={isAuth ? <Friends /> : <Navigate to="/login" replace />}
             />
-
-            {/* Список друзей */}
             <Route
               path="/friends-list"
-              element={session ? <FriendsList /> : <Navigate to="/login" replace />}
+              element={isAuth ? <FriendsList /> : <Navigate to="/login" replace />}
             />
-
-            {/* Заявки в друзья */}
             <Route
               path="/requests"
-              element={session ? <Requests /> : <Navigate to="/login" replace />}
+              element={isAuth ? <Requests /> : <Navigate to="/login" replace />}
             />
 
-            {/* Чат с пользователем */}
+            {/* Чаты */}
             <Route
               path="/chat/:partnerId"
-              element={session ? <Chat /> : <Navigate to="/login" replace />}
+              element={isAuth ? <Chat /> : <Navigate to="/login" replace />}
             />
-
-            {/* Диалоги */}
             <Route
               path="/dialogs"
-              element={session ? <Dialogs /> : <Navigate to="/login" replace />}
+              element={isAuth ? <Dialogs /> : <Navigate to="/login" replace />}
             />
 
-            {/* Админ панель */}
+            {/* Админка */}
             <Route
               path="/admin"
-              element={session ? <Admin /> : <Navigate to="/login" replace />}
+              element={isAuth ? <Admin /> : <Navigate to="/login" replace />}
+            />
+            <Route
+              path="/admin-shop"
+              element={isAuth ? <AdminShop /> : <Navigate to="/login" replace />}
+            />
+            <Route
+              path="/admin-orders"
+              element={isAuth ? <Orders /> : <Navigate to="/login" replace />}
             />
 
             {/* Магазин */}
             <Route
               path="/shop"
-              element={session ? <Shop /> : <Navigate to="/login" replace />}
+              element={isAuth ? <Shop /> : <Navigate to="/login" replace />}
             />
-
-            {/* Корзина */}
             <Route
               path="/cart"
-              element={session ? <Cart session={session} /> : <Navigate to="/login" replace />}
+              element={isAuth ? <Cart session={session} /> : <Navigate to="/login" replace />}
             />
 
-            {/* Управление магазином */}
+            {/* Правила */}
             <Route
-              path="/admin-shop"
-              element={session ? <AdminShop /> : <Navigate to="/login" replace />}
+              path="/server-rules"
+              element={isAuth ? <ServerRules /> : <Navigate to="/login" replace />}
             />
-
-            {/* Заказы */}
             <Route
-              path="/admin-orders"
-              element={session ? <Orders /> : <Navigate to="/login" replace />}
+              path="/edit-rules"
+              element={isAuth ? <EditRules /> : <Navigate to="/login" replace />}
             />
 
             {/* Fallback */}
